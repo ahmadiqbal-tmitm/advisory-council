@@ -55,6 +55,11 @@ Lesson for the tutorial: the server never changed. The whole user experience liv
 - A tutorial now lives at `advisorycouncil.ahmads.build/tutorial/` (`public/tutorial/index.html`): choose advisors, write one document each, start from this repo in Claude Code, test, deploy, connect, tune the prompts. Its steps sit behind the same email box as the Chief of Staff tutorial.
 - From now on a launch does all of this in one pass: subdomain, agents page, Build with me page, home page, and a doc for Friday's writing. The steps are written down in the "Build 52 launch process" doc.
 
+**14:15 One mapping for every agent.** Ahmad spotted that the two agents did not match. The rule is now the same for all: `<name>.ahmads.build` is the install page, and `<name>.ahmads.build/tutorial/` is the tutorial.
+- This install page lost its "Why I built this" card. That and "What I learned" live only on the tutorial.
+- The Chief of Staff was moved to match: its install page went from `ahmads.build/agents/chief-of-staff/` to `chiefofstaff.ahmads.build`, and its tutorial to `chiefofstaff.ahmads.build/tutorial/`. The old install address redirects.
+- The phone menu on all sites now shows About and LinkedIn at the same size, centred, with no outline.
+
 **What broke and how it was fixed**
 - "partnership" did not match the "partner" rows in the Socrates sheet. Added a rule that trims "-ship" before matching.
 
