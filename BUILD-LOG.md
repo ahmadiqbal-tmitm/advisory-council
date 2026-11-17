@@ -48,6 +48,8 @@ Lesson for the tutorial: the server never changed. The whole user experience liv
 
 **14:00 Avatar.** Added the council's avatar, a pixel-art owl in blue sunglasses, to the page. The original is 2048 pixels wide; the copy in `public/` is 480 so the page stays light.
 
+**14:10 Listed on ahmads.build.** The council now has a tile on the home page and a card on the agents page, both linking to `advisorycouncil.ahmads.build`. That work is in the website's own repo (`ahmads-build`), not this one. The agents page also gained one line explaining that some agents are connectors with nothing to download.
+
 **What broke and how it was fixed**
 - "partnership" did not match the "partner" rows in the Socrates sheet. Added a rule that trims "-ship" before matching.
 
