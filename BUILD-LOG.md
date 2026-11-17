@@ -59,6 +59,7 @@ Lesson for the tutorial: the server never changed. The whole user experience liv
 - This install page lost its "Why I built this" card. That and "What I learned" live only on the tutorial.
 - The Chief of Staff was moved to match: its install page went from `ahmads.build/agents/chief-of-staff/` to `chiefofstaff.ahmads.build`, and its tutorial to `chiefofstaff.ahmads.build/tutorial/`. The old install address redirects.
 - The phone menu on all sites now shows About and LinkedIn at the same size, centred, with no outline.
+- The two install pages now share one layout: numbered steps in the main column, "What you'll need" as a side card, then "How it works" and a link to the code. The Chief of Staff page was rebuilt on this page's template.
 
 **What broke and how it was fixed**
 - "partnership" did not match the "partner" rows in the Socrates sheet. Added a rule that trims "-ship" before matching.
