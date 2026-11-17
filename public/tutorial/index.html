@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advisory Council agent tutorial</title>
+<meta property="og:image" content="https://advisorycouncil.ahmads.build/advisory-council.png">
+<meta name="description" content="Build your own council of advisors inside Claude in an afternoon. You describe it, Claude Code builds it.">
+<link rel="icon" type="image/png" href="https://ahmads.build/images/favicon.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="https://ahmads.build/images/favicon-light.png" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Shared Build 52 styles and phone menu, served from the main site so both sites stay in sync. -->
+<link rel="stylesheet" href="https://ahmads.build/assets/brand.css">
+<script src="https://ahmads.build/assets/site.js" defer></script>
+<script src="https://ahmads.build/assets/gate.js" defer></script>
+<style>
+  /* Tutorial-only styles. Colours, type and buttons come from brand.css. */
+  html { scroll-behavior: smooth; }
+  strong, b { font-weight: 600; }
+
+  .tutorial-intro { padding: var(--space-24) 0 var(--space-12); }
+  .back { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: var(--space-4); }
+  .agent-avatar { display: block; width: 120px; height: 120px; border-radius: var(--radius-md); margin-bottom: var(--space-6); }
+  .tutorial-intro h1 { margin-top: var(--space-4); max-width: 18ch; }
+  .lede { margin-top: var(--space-6); font-size: 20px; line-height: 30px; }
+  .install-note { margin-top: var(--space-4); color: var(--ink-muted); }
+
+  .layout {
+    display: grid; gap: var(--space-12);
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: var(--space-12);
+  }
+  @media (min-width: 1025px) {
+    .layout { grid-template-columns: minmax(0, 1fr) 340px; gap: var(--space-24); }
+  }
+
+  /* Reading column */
+  main { max-width: 720px; }
+  main h2 { margin-top: calc(var(--space-12) + var(--space-4)); }
+  main > h2:first-child { margin-top: 0; }
+  main h3 { margin-top: var(--space-6); }
+  main p, main ul, main ol, main dl { margin: var(--space-4) 0 0; }
+  .time { font-size: 17px; line-height: 28px; font-weight: 400; letter-spacing: 0; color: var(--ink-muted); white-space: nowrap; }
+  ul, ol { padding-left: 1.4em; }
+  li { margin: var(--space-2) 0; max-width: var(--measure); }
+  li::marker { color: var(--ink-muted); }
+
+  dl.terms dt { font-weight: 600; margin-top: var(--space-4); }
+  dl.terms dd { margin: var(--space-1) 0 0; color: var(--ink-muted); max-width: var(--measure); }
+
+  /* "Why this matters" panels */
+  .why {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-6);
+  }
+  main p.why { margin-top: var(--space-6); }
+  .note { color: var(--ink-muted); }
+
+  /* Prompt or code block */
+  .code-wrap {
+    margin: var(--space-6) 0 var(--space-6);
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+  }
+  .code-label {
+    display: flex; justify-content: space-between; align-items: center; gap: var(--space-4);
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 13px; line-height: 18px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted);
+  }
+  pre {
+    margin: 0; padding: var(--space-6);
+    font-family: var(--font-mono); font-size: 15px; line-height: 24px; font-weight: 400;
+    white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink);
+  }
+  .copy-btn { min-height: 44px; padding: 8px 16px; font-size: 15px; }
+
+  /* Sidebar build notes */
+  aside.side .card { gap: var(--space-4); font-size: 16px; line-height: 26px; }
+  aside.side .card + .card { margin-top: var(--space-4); }
+  aside.side h2 { font-size: 22px; line-height: 30px; letter-spacing: 0; }
+  aside.side ul { margin: 0; }
+  aside.side li { margin: var(--space-2) 0; }
+
+  .build-note { padding-bottom: var(--space-24); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .tutorial-intro { padding: var(--space-12) 0 var(--space-6); }
+    .lede { font-size: 17px; line-height: 28px; }
+    .build-note { padding-bottom: var(--space-12); }
+    main h2 { margin-top: var(--space-12); }
+    .why { padding: var(--space-4); }
+    .code-label { padding-left: var(--space-4); }
+    pre { padding: var(--space-4); }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#guide">Skip to content</a>
+
+<header class="site-header">
+  <nav class="nav container" aria-label="Main">
+    <a href="https://ahmads.build/" class="logo"><img src="https://ahmads.build/images/logo.png" alt="Build 52 by Ahmad Iqbal – home" width="107" height="32"></a>
+    <div class="nav-menu" id="nav-menu">
+      <a href="https://ahmads.build/about/">About</a>
+      <a href="https://www.linkedin.com/in/ahmadiqbal1" class="btn btn-outline" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2LftEg_0td3W-pWEFQwLBZ6LC8GmgLlSoYkhCQzig38rFytq_mOt4pI7OCqQhuaOxfuIOIdP54" class="btn btn-primary">Book a call</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+    </button>
+  </nav>
+</header>
+
+<div class="container">
+<header class="tutorial-intro">
+  <a href="https://ahmads.build/resources/" class="back">← Build with me</a>
+  <img src="/advisory-council.png" alt="Advisory Council avatar: a pixel-art owl in blue sunglasses" width="120" height="120" class="agent-avatar">
+  <p class="eyebrow">Agent #2 · Built in public</p>
+  <h1>Advisory Council agent tutorial</h1>
+  <p class="lede">Build your own council of advisors inside Claude in an afternoon. You describe it. Claude Code builds it.</p>
+  <p class="install-note">Just want to use mine? <a href="/">Add the advisory council</a> in about two minutes.</p>
+</header>
+
+<div class="layout">
+<main id="guide">
+
+  <h2 id="what">What you'll build</h2>
+  <p>A connector for Claude with advisors you choose:</p>
+  <ul>
+    <li>Each advisor has <strong>one field</strong> and answers <strong>in their own words</strong>.</li>
+    <li>You can ask <strong>one advisor</strong>, or <strong>the whole council</strong>.</li>
+    <li>On a council question, one advisor <strong>opens with a single question</strong>, sums up their understanding, then the others answer.</li>
+    <li>Anyone you share the link with can add it to their Claude.</li>
+  </ul>
+  <p>Mine has Socrates, Sun Tzu, Marshall McLuhan and Marcus Aurelius. Yours can be anyone whose thinking you can write down: an author, a mentor, a founder you admire.</p>
+
+  <h2 id="need">What you need</h2>
+  <ul>
+    <li>A Claude plan that includes <strong>Claude Code</strong> and <strong>custom connectors</strong>. Check <a href="https://claude.com/pricing">claude.com/pricing</a>.</li>
+    <li>The <strong>Claude desktop app</strong>. Claude Code is the <strong>Code</strong> tab inside it.</li>
+    <li>A free <strong>Cloudflare</strong> account. This is where your council will live.</li>
+    <li>A free <strong>GitHub</strong> account, if you want to share your code.</li>
+    <li>About <strong>three hours</strong>. Most of it is writing about your advisors, not building.</li>
+  </ul>
+
+  <h2 id="words">Four words you'll see</h2>
+  <dl class="terms">
+    <dt>Connector</dt>
+    <dd>A plug that lets Claude reach something outside itself. Here, your advisors' material.</dd>
+    <dt>MCP server</dt>
+    <dd>The technical name for what sits behind a connector. You won't write one. Claude Code will.</dd>
+    <dt>Claude Code</dt>
+    <dd>Claude with the ability to create files and run them on your computer. You talk, it builds.</dd>
+    <dt>Deploy</dt>
+    <dd>Putting your council on the internet so Claude can reach it from anywhere.</dd>
+  </dl>
+
+  <div data-gate="tutorial">
+
+  <h2 id="step1">Step 1: Choose your advisors <span class="time">(10 minutes)</span></h2>
+  <p>Pick three or four people, and give each <strong>one field</strong>. The fields should not overlap.</p>
+  <ol>
+    <li>Advisor 1: ___ · field: ___</li>
+    <li>Advisor 2: ___ · field: ___</li>
+    <li>Advisor 3: ___ · field: ___</li>
+    <li>Which one opens every council session with a question? ___</li>
+  </ol>
+  <p class="why"><strong>Why this matters:</strong> advisors with the same field give you the same answer three times. Different fields give you a real disagreement to think about.</p>
+
+  <h2 id="step2">Step 2: Write one document per advisor <span class="time">(30 minutes each)</span></h2>
+  <p>This is the real work. Each advisor is only as good as the document behind them. In a normal Claude chat, paste this for each advisor:</p>
+  <div class="code-wrap">
+    <div class="code-label"><span>Prompt</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>Help me write an advisor document for ___, whose field is ___.
+
+Interview me one question at a time. Then write the document with these sections:
+
+1. Field: what this advisor is for, and what they are not for.
+2. Profile: who they were, in a few lines.
+3. Core principles: 8 to 12, each with a plain-words meaning and where it comes from.
+4. How they speak: tone, typical phrases, what they would never say.
+5. Blind spots: where their thinking is weak or dated.
+6. My modern context: how I apply their ideas to my own work and life.
+7. Sources: what this is based on, and what you are unsure about.
+
+Use only real sources. Do not invent quotations. Mark anything you are unsure of.</code></pre>
+  </div>
+  <p>Save each one as a Markdown file. In Claude, use the menu on the document to export it.</p>
+  <p class="why"><strong>Why this matters:</strong> your council does no thinking of its own. It hands this document to Claude, and Claude answers from it. A thin document gives you a generic advisor.</p>
+  <p class="note"><strong>Tip:</strong> the "My modern context" section is what makes the advisor yours. Leave out anything you would not want strangers to read, because anyone with your link can ask for it.</p>
+
+  <h2 id="step3">Step 3: Give Claude Code my council to start from <span class="time">(10 minutes)</span></h2>
+  <p>You don't start from a blank page. My council is public, and it is built so that adding an advisor takes one document and one entry in a list.</p>
+  <ol>
+    <li>Open the Claude desktop app and choose the <strong>Code</strong> tab.</li>
+    <li>Pick an empty folder for your project and drop your advisor documents into it.</li>
+    <li>Paste the prompt below.</li>
+  </ol>
+  <div class="code-wrap">
+    <div class="code-label"><span>Prompt</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>I want to build my own advisory council, based on this public project:
+https://github.com/ahmadiqbal-tmitm/advisory-council
+
+Copy that project into this folder. Then replace its four advisors with mine. My advisor documents are in this folder.
+
+- Read its README.md and BUILD-LOG.md first.
+- Put my documents in the advisors folder and update advisors.json to match.
+- The advisor who opens every council session is ___.
+- Remove the question sheets unless I give you my own.
+
+I am not technical. Explain each step in plain words, and ask me before anything that can't be undone.</code></pre>
+  </div>
+  <p class="why"><strong>Why this matters:</strong> the hard parts are already solved in that project. You are changing who the advisors are, not how the council works.</p>
+
+  <h2 id="step4">Step 4: Test it on your computer <span class="time">(10 minutes)</span></h2>
+  <p>Before anything goes online, ask Claude Code to prove it works:</p>
+  <div class="code-wrap">
+    <div class="code-label"><span>Prompt</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>Run the council on this computer and run the local checks. Show me what each advisor's tool returns for this question: "___".</code></pre>
+  </div>
+  <p>You are looking for three things: every advisor is listed, each one returns their own document, and an empty question gets a polite message.</p>
+
+  <h2 id="step5">Step 5: Put it online <span class="time">(15 minutes)</span></h2>
+  <ol>
+    <li>Create a free account at <a href="https://dash.cloudflare.com/sign-up">cloudflare.com</a>.</li>
+    <li>Tell Claude Code: <strong>"Deploy this to Cloudflare."</strong></li>
+    <li>It will ask you to sign in to Cloudflare in your browser. Approve it.</li>
+    <li>When it finishes, it gives you an address ending in <strong>/mcp</strong>. That is your council.</li>
+  </ol>
+  <p class="why"><strong>Why this matters:</strong> a council on your computer only works while your computer is on. Online, it works from your phone, and for anyone you share it with.</p>
+
+  <h2 id="step6">Step 6: Add it to Claude <span class="time">(2 minutes)</span></h2>
+  <ol>
+    <li>In Claude, open <strong>Settings</strong>, then <strong>Connectors</strong>.</li>
+    <li>Click <strong>Add custom connector</strong> and paste your address.</li>
+    <li>Start a new chat and paste the prompt below with a real decision.</li>
+  </ol>
+  <div class="code-wrap">
+    <div class="code-label"><span>Prompt</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>Ask the council whether I should ___.</code></pre>
+  </div>
+
+  <h2 id="step7">Step 7: Tune how it talks</h2>
+  <p>Your first conversation will probably feel wrong. Mine did: long walls of text, and advisors described from the outside instead of speaking.</p>
+  <p>The fix is not code. The way the council talks lives in three plain-text files in the <strong>prompts</strong> folder. Tell Claude Code what felt wrong, in your own words:</p>
+  <div class="code-wrap">
+    <div class="code-label"><span>Prompt</span><button class="copy-btn btn btn-outline" type="button">Copy</button></div>
+<pre><code>I tried the council and here is what I didn't like: ___.
+
+Change the files in the prompts folder to fix it, deploy again, and tell me what you changed.</code></pre>
+  </div>
+  <p>Then start a <strong>new</strong> chat and try again. Repeat until it sounds right.</p>
+  <p class="why"><strong>Why this matters:</strong> this is where a working council becomes one you want to use. I changed mine once and it went from a report to a conversation.</p>
+
+  <h2 id="next">What to try next</h2>
+  <ul>
+    <li><strong>Add a question bank.</strong> A spreadsheet of questions and how the advisor would answer. Socrates and Marcus Aurelius have one in my council.</li>
+    <li><strong>Give it your own address,</strong> like mine at advisorycouncil.ahmads.build. Ask Claude Code to add a custom domain.</li>
+    <li><strong>Add it to a Project,</strong> so your other agents can call an advisor.</li>
+  </ul>
+
+  </div>
+
+</main>
+
+<aside class="side" aria-label="About this build">
+  <section class="card">
+    <h2>Why I built this</h2>
+    <p>I had three real decisions in front of me: whether to join a partnership, how to start a workshop business, and whether to invest in a friend's company.</p>
+    <p>I wanted more than one opinion. So I built a council: four thinkers I keep going back to, each asked to look at the same question from their own field.</p>
+    <p>It took one afternoon with Claude Code. I wrote a brief describing what I wanted, and we built it together step by step.</p>
+  </section>
+
+  <section class="card">
+    <h2>What I learned</h2>
+    <ul>
+      <li><strong>The documents are the advisors.</strong> Most of my time went into writing about each thinker, not into building.</li>
+      <li><strong>The prompts are the product.</strong> When the first replies came back as walls of text, three plain-text files fixed it. The code never changed.</li>
+      <li><strong>Advisors should speak, not be described.</strong> "Sun Tzu: you are choosing between…" reads like a conversation.</li>
+      <li><strong>Tell Claude Code to check the current docs.</strong> My brief named a way of building that had been replaced a few weeks earlier. It caught that because I had asked it not to rely on memory.</li>
+      <li><strong>Decide what is private before you go public.</strong> I took two personal details out of my documents before sharing the code.</li>
+      <li><strong>Keep the server simple.</strong> Mine does no thinking and stores nothing, so it costs almost nothing to run.</li>
+    </ul>
+  </section>
+</aside>
+</div>
+
+<p class="caption build-note">Built by Ahmad Iqbal as part of building one agent a week, in public. More at <a href="https://ahmads.build">ahmads.build</a>.</p>
+</div>
+  <section class="site-cards container" aria-label="Explore the site">
+    <div class="cards">
+      <article class="card">
+        <h2 class="h3">Writing</h2>
+        <p>Weekly notes on what I'm building and learning.</p>
+        <a href="https://ahmads.build/writing/" class="card-link">Read the latest</a>
+      </article>
+      <article class="card">
+        <h2 class="h3">Build with me</h2>
+        <p>Templates and guides to build your own agents.</p>
+        <a href="https://ahmads.build/resources/" class="card-link">See the guides</a>
+      </article>
+      <article class="card">
+        <h2 class="h3">Agents</h2>
+        <p>Ready-made agents to install in Claude. No code needed.</p>
+        <a href="https://ahmads.build/agents/" class="card-link">Install an agent</a>
+      </article>
+    </div>
+  </section>
+
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <p class="main-line">From AI happening to you, to AI working for you.</p>
+    <ul class="footer-links">
+      <li><a href="https://ahmads.build/about/">About</a></li>
+      <li><a href="https://ahmads.build/writing/">Writing</a></li>
+      <li><a href="https://ahmads.build/resources/">Build with me</a></li>
+      <li><a href="https://ahmads.build/agents/">Agents</a></li>
+      <li><a href="https://ahmads.build/office-hours/">Office hours</a></li>
+      <li><a href="https://www.linkedin.com/in/ahmadiqbal1" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+    <p class="copyright">© 2026 Ahmad Iqbal · ahmads.build</p>
+  </div>
+</footer>
+
+<p class="sr-only" aria-live="polite" id="copy-status"></p>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    var label = btn.closest('.code-label').querySelector('span');
+    if (label) btn.setAttribute('aria-label', 'Copy ' + label.textContent.trim().toLowerCase());
+    btn.addEventListener('click', function () {
+      var code = btn.closest('.code-wrap').querySelector('code').innerText;
+      var status = document.getElementById('copy-status');
+      function done(ok) {
+        btn.textContent = ok ? 'Copied' : 'Select and copy';
+        status.textContent = ok ? 'Copied to clipboard' : 'Copy failed. Select the text and copy it manually.';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(function () { done(true); }, function () { done(false); });
+      } else { done(false); }
+    });
+  });
+</script>
+</body>
+</html>

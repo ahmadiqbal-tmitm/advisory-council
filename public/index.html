@@ -124,30 +124,12 @@
   <img src="/advisory-council.png" alt="Advisory Council avatar: a pixel-art owl in blue sunglasses" width="120" height="120" class="agent-avatar">
   <p class="eyebrow">Agent #2 · Built in public</p>
   <h1>AI Advisory Council</h1>
-  <p class="lede">Four advisors inside Claude, each a master of one field. Add one link, then bring them your next decision.</p>
-  <p class="install-note">Takes about two minutes. No code. No account to create.</p>
+  <p class="lede">Socrates, Sun Tzu, Marshall McLuhan and Marcus Aurelius, inside Claude. Add one link, then bring them your next decision.</p>
+  <p class="install-note">Want to build your own council? <a href="/tutorial/">Follow the tutorial</a>.</p>
 </header>
 
 <div class="layout">
 <main id="guide">
-
-  <h2 id="who">Who is on the council</h2>
-  <dl class="terms">
-    <dt>Socrates · questioning</dt>
-    <dd>Tests your definitions, assumptions and contradictions. He opens every council session with one question.</dd>
-    <dt>Sun Tzu · strategy</dt>
-    <dd>Positioning, timing, strengths and weaknesses.</dd>
-    <dt>Marshall McLuhan · technology and media</dt>
-    <dd>Whether a product idea has legs, and how to think in a world of AI and agents.</dd>
-    <dt>Marcus Aurelius · way of life</dt>
-    <dd>Temperament, setbacks, other people, and what is within your control.</dd>
-  </dl>
-
-  <h2 id="need">What you need</h2>
-  <ul>
-    <li>A Claude account on a plan that includes <strong>custom connectors</strong>. Check <a href="https://claude.com/pricing">claude.com/pricing</a>.</li>
-    <li>About <strong>two minutes</strong>.</li>
-  </ul>
 
   <h2 id="step1">Step 1: Add the council to Claude <span class="time">(1 minute)</span></h2>
   <ol>
@@ -185,6 +167,7 @@
 
   <h2 id="how">How it works</h2>
   <ul>
+    <li><strong>Four advisors, one field each.</strong> Socrates on questioning, Sun Tzu on strategy, Marshall McLuhan on technology and media, Marcus Aurelius on way of life.</li>
     <li><strong>The council is a library, not a brain.</strong> It hands your Claude each advisor's material: their principles, how they speak, and for Socrates and Marcus Aurelius a bank of questions. Your own Claude writes the replies from it.</li>
     <li><strong>Nothing is stored.</strong> There are no accounts. The council keeps no record of what you ask.</li>
     <li><strong>It is free.</strong></li>
@@ -192,26 +175,25 @@
   </ul>
 
   <h2 id="code">See how it is built</h2>
-  <p>The code, the advisors' material and the build log are public on <a href="https://github.com/ahmadiqbal-tmitm/advisory-council">GitHub</a>. Adding an advisor of your own takes one document and one entry in a list.</p>
+  <p>The code, the advisors' material and the build log are public on <a href="https://github.com/ahmadiqbal-tmitm/advisory-council">GitHub</a>. Want your own advisors? <a href="/tutorial/">The tutorial</a> shows how to build a council of your own.</p>
 
 </main>
 
 <aside class="side" aria-label="About this build">
   <section class="card">
+    <h2>What you'll need</h2>
+    <ul>
+      <li>A Claude plan that includes <strong>custom connectors</strong>. Check <a href="https://claude.com/pricing">claude.com/pricing</a>.</li>
+      <li>About <strong>two minutes</strong>.</li>
+      <li>No code. No account to create.</li>
+    </ul>
+  </section>
+
+  <section class="card">
     <h2>Why I built this</h2>
     <p>I had three real decisions in front of me: whether to join a partnership, how to start a workshop business, and whether to invest in a friend's company.</p>
     <p>I wanted more than one opinion. So I built a council: four thinkers I keep going back to, each asked to look at the same question from their own field.</p>
     <p>I built it for my own decisions first. Now anyone can add it to Claude.</p>
-  </section>
-
-  <section class="card">
-    <h2>What I learned</h2>
-    <ul>
-      <li><strong>The prompts are the product.</strong> When the first replies came back as walls of text, I fixed it by rewriting three plain-text files. The code never changed.</li>
-      <li><strong>Advisors should speak, not be described.</strong> "Sun Tzu: you are choosing between…" reads like a conversation. "Sun Tzu looks at the ground…" reads like a report.</li>
-      <li><strong>Short wins.</strong> One question from Socrates gets you to value faster than a paragraph explaining what is about to happen.</li>
-      <li><strong>Keep the server simple.</strong> It does no thinking and stores nothing, so it costs almost nothing to run.</li>
-    </ul>
   </section>
 </aside>
 </div>

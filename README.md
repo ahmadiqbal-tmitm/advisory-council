@@ -46,7 +46,8 @@ npm run check    # in a second terminal: runs the local checks
 - `src/material.ts`: loads the advisor docs, prompts and question rows.
 - `src/match.ts`: keyword matching that picks the 5 closest question rows.
 - `scripts/bundle-material.mjs`: packs the content into the Worker before each run.
-- `public/index.html`: the web page shown at the root address.
+- `public/index.html`: the install page shown at the root address.
+- `public/tutorial/index.html`: the build-your-own tutorial at `/tutorial/`.
 
 It runs on Cloudflare Workers using Cloudflare's `agents` package and the official MCP SDK.
 

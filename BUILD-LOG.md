@@ -50,6 +50,11 @@ Lesson for the tutorial: the server never changed. The whole user experience liv
 
 **14:10 Listed on ahmads.build.** The council now has a tile on the home page and a card on the agents page, both linking to `advisorycouncil.ahmads.build`. That work is in the website's own repo (`ahmads-build`), not this one. The agents page also gained one line explaining that some agents are connectors with nothing to download.
 
+**14:30 Tutorial, and a leaner install page.** Ahmad's feedback: don't wait a day for the tutorial, and get people to Step 1 faster.
+- The install page now opens straight on Step 1. "Who is on the council" is gone, "What you'll need" is a card in the side column, and "What I learned" moved out (those points belong in the weekly writing).
+- A tutorial now lives at `advisorycouncil.ahmads.build/tutorial/` (`public/tutorial/index.html`): choose advisors, write one document each, start from this repo in Claude Code, test, deploy, connect, tune the prompts. Its steps sit behind the same email box as the Chief of Staff tutorial.
+- From now on a launch does all of this in one pass: subdomain, agents page, Build with me page, home page, and a doc for Friday's writing. The steps are written down in the "Build 52 launch process" doc.
+
 **What broke and how it was fixed**
 - "partnership" did not match the "partner" rows in the Socrates sheet. Added a rule that trims "-ship" before matching.
 
