@@ -12,7 +12,7 @@ A connector for Claude with four advisors, each a master of one field, plus a wa
 
 The server does no thinking. It hands over each advisor's material, and your own Claude writes the advice from it. There are no accounts and nothing is stored.
 
-Part of [Build 52](https://ahmads.build), one agent a week, built in public. The page for this agent is at [advisorycouncil.ahmads.build](https://advisorycouncil.ahmads.build).
+Week 2 of [Build 52](https://ahmads.build), one agent a week, built in public. The page for this agent is at [advisorycouncil.ahmads.build](https://advisorycouncil.ahmads.build).
 
 ## Add it to Claude
 
