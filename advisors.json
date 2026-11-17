@@ -1,0 +1,52 @@
+[
+  {
+    "id": "socrates",
+    "name": "Socrates",
+    "field": "questioning",
+    "tool": "ask_socrates",
+    "description": "Ask Socrates, the council's questioning advisor, to test a definition, an assumption or a contradiction in your thinking. Returns his source material and closest questions; you then reply as him ('Socrates: …'), one short question at a time.",
+    "summary": "questioning: tests definitions, assumptions and contradictions.",
+    "doc": "advisors/socrates.md",
+    "questions": "questions/socrates.csv",
+    "matchColumns": { "Question": 3, "Topic": 2, "Area": 1, "Word to define": 1 },
+    "dialogueNote": "For Socrates, a one-on-one conversation follows the section \"How a conversation runs\" in his material above. This is the longer dialogue, not the short council opening. Each turn is still a single short \"Socrates: …\" question or remark."
+  },
+  {
+    "id": "sun-tzu",
+    "name": "Sun Tzu",
+    "field": "strategy",
+    "tool": "ask_sun_tzu",
+    "description": "Ask Sun Tzu, the council's strategy advisor, about positioning, timing, competition or a plan. Returns his source material; you then reply as him ('Sun Tzu: …'), briefly, over several turns.",
+    "summary": "strategy: positioning, timing, strengths and weaknesses.",
+    "doc": "advisors/sun-tzu.md",
+    "questions": null
+  },
+  {
+    "id": "mcluhan",
+    "name": "Marshall McLuhan",
+    "field": "technology and media",
+    "tool": "ask_mcluhan",
+    "description": "Ask Marshall McLuhan, the council's technology and media advisor, whether a product idea has legs and how to think about media, AI and agents. Returns his source material, with a brief on Walter Ong's orality and literacy; you then reply as him ('Marshall McLuhan: …'), briefly, over several turns.",
+    "summary": "technology and media: whether a product idea has legs, and how to think in the AI and agentic world.",
+    "doc": "advisors/mcluhan.md",
+    "extraDocs": [
+      {
+        "title": "Tertiary Orality: lessons from Walter Ong's Orality and Literacy",
+        "doc": "advisors/mcluhan-tertiary-orality.md",
+        "note": "Walter Ong was a student of McLuhan. On any question about media, conversation, voice or AI agents, draw on this brief alongside McLuhan's own material, and say when a point comes from Ong rather than McLuhan."
+      }
+    ],
+    "questions": null
+  },
+  {
+    "id": "marcus-aurelius",
+    "name": "Marcus Aurelius",
+    "field": "way of life",
+    "tool": "ask_marcus_aurelius",
+    "description": "Ask Marcus Aurelius, the council's way-of-life advisor, about temperament, setbacks, other people and what is within one's control. Returns his source material and the closest questions with passages from the Meditations; you then reply as him ('Marcus Aurelius: …'), briefly, over several turns.",
+    "summary": "way of life: temperament, setbacks, other people, what is within one's control.",
+    "doc": "advisors/marcus-aurelius.md",
+    "questions": "questions/marcus-aurelius.csv",
+    "matchColumns": { "Question": 3, "Category": 2 }
+  }
+]

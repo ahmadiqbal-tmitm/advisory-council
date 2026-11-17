@@ -1,0 +1,30 @@
+name = "advisory-council"
+main = "src/index.ts"
+compatibility_date = "2026-11-10"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+# The permanent address. Cloudflare creates the DNS record and certificate itself.
+routes = [{ pattern = "advisorycouncil.ahmads.build", custom_domain = true }]
+
+# The web page at the root address. Anything that is not a file here (such as /mcp) goes to the Worker.
+[assets]
+directory = "./public"
+
+# Packs the advisor docs, prompts and question sheets before each dev run and deploy.
+[build]
+command = "node scripts/bundle-material.mjs"
+watch_dir = ["advisors", "questions", "prompts", "advisors.json"]
+
+# Rate limit, counted per caller address. Claude reaches the server from
+# shared Anthropic addresses, so this is set high enough for many people at once.
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 300
+  period = 60
+
+[observability]
+enabled = true

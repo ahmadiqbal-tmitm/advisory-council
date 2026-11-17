@@ -1,0 +1,24 @@
+{
+  "name": "advisory-council",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Advisory Council: a remote MCP connector with four advisors and an ask-the-council tool.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "check": "node scripts/local-check.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.4.0",
+    "agents": "^0.33.0",
+    "csv-parse": "^7.0.3",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261117.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.163.0"
+  }
+}
