@@ -39,18 +39,18 @@ Lesson for the tutorial: the server never changed. The whole user experience liv
 
 **13:20 Custom domain.** The council now answers at `https://advisorycouncil.ahmads.build/mcp`. One line in `wrangler.toml` did it; Cloudflare created the DNS record and certificate on its own because `ahmads.build` is already on the account. All checks pass at the new address. The `workers.dev` address still works too.
 
-**13:45 Going public.** Ahmad decided the repo should be public, because the point is to build in public.
+**13:30 Going public.** Ahmad decided the repo should be public, because the point is to build in public.
 - Removed from the Marcus doc: the story of the job ending, the income goal, and the "before launch" reminder. The original Claude doc is unchanged, so a fresh export would bring them back.
 - The local history was squashed into one snapshot before the first upload, so the removed text is not in the public history.
 - McLuhan's quotations stay as they are (Ahmad's call).
 
-**13:50 A web page at the root address.** `advisorycouncil.ahmads.build` now shows a page in the same design as `chiefofstaff.ahmads.build`: who is on the council, the connector address with a copy button, and how to ask. It lives in `public/index.html` and reuses the shared Build 52 styles from `ahmads.build`. The Worker serves it as a static file; `/mcp` still goes to the council.
+**13:30 A web page at the root address.** `advisorycouncil.ahmads.build` now shows a page in the same design as `chiefofstaff.ahmads.build`: who is on the council, the connector address with a copy button, and how to ask. It lives in `public/index.html` and reuses the shared Build 52 styles from `ahmads.build`. The Worker serves it as a static file; `/mcp` still goes to the council.
 
-**14:00 Avatar.** Added the council's avatar, a pixel-art owl in blue sunglasses, to the page. The original is 2048 pixels wide; the copy in `public/` is 480 so the page stays light.
+**13:40 Avatar.** Added the council's avatar, a pixel-art owl in blue sunglasses, to the page. The original is 2048 pixels wide; the copy in `public/` is 480 so the page stays light.
 
-**14:10 Listed on ahmads.build.** The council now has a tile on the home page and a card on the agents page, both linking to `advisorycouncil.ahmads.build`. That work is in the website's own repo (`ahmads-build`), not this one. The agents page also gained one line explaining that some agents are connectors with nothing to download.
+**13:45 Listed on ahmads.build.** The council now has a tile on the home page and a card on the agents page, both linking to `advisorycouncil.ahmads.build`. That work is in the website's own repo (`ahmads-build`), not this one. The agents page also gained one line explaining that some agents are connectors with nothing to download.
 
-**14:30 Tutorial, and a leaner install page.** Ahmad's feedback: don't wait a day for the tutorial, and get people to Step 1 faster.
+**13:55 Tutorial, and a leaner install page.** Ahmad's feedback: don't wait a day for the tutorial, and get people to Step 1 faster.
 - The install page now opens straight on Step 1. "Who is on the council" is gone, "What you'll need" is a card in the side column, and "What I learned" moved out (those points belong in the weekly writing).
 - A tutorial now lives at `advisorycouncil.ahmads.build/tutorial/` (`public/tutorial/index.html`): choose advisors, write one document each, start from this repo in Claude Code, test, deploy, connect, tune the prompts. Its steps sit behind the same email box as the Chief of Staff tutorial.
 - From now on a launch does all of this in one pass: subdomain, agents page, Build with me page, home page, and a doc for Friday's writing. The steps are written down in the "Build 52 launch process" doc.
