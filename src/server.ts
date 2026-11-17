@@ -98,7 +98,16 @@ export function councilBriefing(input: Input): string {
 
 export function createServer(): McpServer {
   const server = new McpServer(
-    { name: "AI Advisory Council", version: "0.1.0" },
+    {
+      name: "AI Advisory Council",
+      title: "AI Advisory Council",
+      version: "0.1.0",
+      websiteUrl: "https://advisorycouncil.ahmads.build",
+      // The owl avatar, for apps that show an icon next to a connector.
+      icons: [
+        { src: "https://advisorycouncil.ahmads.build/icon-256.png", mimeType: "image/png", sizes: ["256x256"] },
+      ],
+    },
     { instructions: prompt("server-instructions") }
   );
 

@@ -61,6 +61,8 @@ Lesson for the tutorial: the server never changed. The whole user experience liv
 - The phone menu on all sites now shows About and LinkedIn at the same size, centred, with no outline.
 - The two install pages now share one layout: numbered steps in the main column, "What you'll need" as a side card, then "How it works" and a link to the code. The Chief of Staff page was rebuilt on this page's template.
 
+**15:00 An icon for the connector.** In Claude's connector list the council showed a default icon. The server now declares the owl as its icon when Claude connects, and the address serves it as the site icon (`favicon.ico`, `icon-256.png`). Whether Claude's list picks it up is not confirmed yet.
+
 **What broke and how it was fixed**
 - "partnership" did not match the "partner" rows in the Socrates sheet. Added a rule that trims "-ship" before matching.
 
