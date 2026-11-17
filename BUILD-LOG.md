@@ -46,6 +46,8 @@ Lesson for the tutorial: the server never changed. The whole user experience liv
 
 **13:50 A web page at the root address.** `advisorycouncil.ahmads.build` now shows a page in the same design as `chiefofstaff.ahmads.build`: who is on the council, the connector address with a copy button, and how to ask. It lives in `public/index.html` and reuses the shared Build 52 styles from `ahmads.build`. The Worker serves it as a static file; `/mcp` still goes to the council.
 
+**14:00 Avatar.** Added the council's avatar, a pixel-art owl in blue sunglasses, to the page. The original is 2048 pixels wide; the copy in `public/` is 480 so the page stays light.
+
 **What broke and how it was fixed**
 - "partnership" did not match the "partner" rows in the Socrates sheet. Added a rule that trims "-ship" before matching.
 
